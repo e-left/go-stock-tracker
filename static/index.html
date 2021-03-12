@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BTC - ETH price tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h2 id="time"></h2>
+    <button onClick="reload()">Reload</button>
+    <table>
+        <tr>
+            <th>BTC</th>
+            <th>ETH</th>
+        </tr>
+        <tr>
+            <th id="btc_price"></th>
+            <th id="eth_price"></th>
+        </tr>
+
+        
+    </table>
+
+    
+    <script defer>
+        
+        let url = "http://localhost:8000";
+        const btcPriceElement = document.getElementById("btc_price");
+        const ethPriceElement = document.getElementById("eth_price");
+        const timeElement = document.getElementById("time");
+    
+        function reload() {
+        fetch(url + "/prices").then((res) => res.json()).then((data) => {
+        console.log(data);
+        btcPriceElement.innerHTML = data.btcPrice;
+        ethPriceElement.innerHTML = data.ethPrice;
+        timeElement.innerHTML = data.time;
+            
+        });
+        }
+        reload();
+    </script>
+    
+</body>
+</html>
